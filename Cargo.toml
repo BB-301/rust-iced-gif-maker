@@ -1,0 +1,23 @@
+[package]
+authors = ["BB-301 <fw3dg3@gmail.com>"]
+description = "A simple FFmpeg-based animated GIF generator application built using Iced"
+edition = "2021"
+keywords = ["rust", "iced", "ffmpeg", "animated gif", "gui"]
+license = "MIT"
+name = "iced-gif-maker"
+repository = "https://github.com/BB-301/rust-iced-gif-maker"
+version = "0.1.0"
+
+[features]
+default = []
+logging = ["dep:env_logger"]
+
+[dependencies]
+env_logger = {version = "0.10.0", optional = true}
+ffmpeg_gif_maker = {git = "https://github.com/BB-301/rust-ffmpeg-gif-maker.git", features = ["tokio"], rev = "3d3fc08"}
+iced = {version = "0.10.0", features = ["image", "tokio", "advanced", "lazy"]}
+iced-loading-indicator = {git = "https://github.com/BB-301/iced-loading-indicator.git", rev = "a09296f"}
+iced_gif = {git = "https://github.com/BB-301/iced_gif.git", rev = "58e3110", features = ["tokio"]}
+log = "0.4.20"
+rfd = "0.12.0"
+tokio = {version = "1.0", features = ["sync", "macros"]}
