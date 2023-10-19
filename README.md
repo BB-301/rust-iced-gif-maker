@@ -4,20 +4,11 @@ This is a simple [FFmpeg](https://www.ffmpeg.org/)-based animated GIF generator 
 
 **NOTE**: Please take the time to read the [potential issue](#potential-issue) section before running this application.
 
-<figure style="text-align: center;">
-    <img src="./assets/iced-gif-maker-app-preview-idle.png" alt="Iced Animated GIF Maker - App preview (idle state)">
-    <caption>Iced Animated GIF Maker - App preview (idle state)</caption>
-</figure>
+![Iced Animated GIF Maker - App preview (idle state)](assets/iced-gif-maker-app-preview-idle.png)
 
-<figure style="text-align: center;">
-    <img src="./assets/iced-gif-maker-app-preview-converting.png" alt="Iced Animated GIF Maker - App preview (converting)">
-    <caption>Iced Animated GIF Maker - App preview (converting state)</caption>
-</figure>
+![Iced Animated GIF Maker - App preview (converting)](assets/iced-gif-maker-app-preview-converting.png)
 
-<figure style="text-align: center;">
-    <img src="./assets/iced-gif-maker-app-preview-previewing.png" alt="Iced Animated GIF Maker - App preview (preview state)">
-    <caption>Iced Animated GIF Maker - App preview (preview state)</caption>
-</figure>
+![Iced Animated GIF Maker - App preview (preview state)](assets/iced-gif-maker-app-preview-previewing.png)
 
 ## How to use
 
