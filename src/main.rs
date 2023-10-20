@@ -498,11 +498,12 @@ impl iced::Application for MyApp {
             }
             MyMessage::SaveResult(result) => match result {
                 Ok(saved) => {
-                    // NOTE: Should warn the user if `false` occurs.
+                    // NOTE: False here simply means that the operation was cancelled.
                     log::info!(target: LOG_TARGET, "File saved: {}", saved);
                     iced::Command::none()
                 }
                 Err(e) => {
+                    // Should warn user about failure to save...
                     log::warn!(target: LOG_TARGET, "Failed to save file: {:?}", e);
                     iced::Command::none()
                 }

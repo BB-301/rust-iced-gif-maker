@@ -1,3 +1,11 @@
+# 0.1.0 (2023-10-20: 3rd deployment)
+
+## Changes
+
+* Fixed a few typos in the README.md file.
+* Modified documentation about possible bug on `macOS`, related to the native file picker and read and write permissions.
+* Updated information about the systems on which the application has so far been tested (now included is Windows 11).
+
 # 0.1.0 (2023-10-19: 2nd deployment)
 
 ## Changes

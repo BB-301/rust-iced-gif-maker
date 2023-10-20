@@ -32,7 +32,7 @@ This project is mainly targeted at Rust programmers who are in the process of le
 * implementing `Iced`'s [subscription method](https://docs.rs/iced/0.10.0/iced/application/trait.Application.html#method.subscription),
 * using the [rfd](https://github.com/PolyMeilex/rfd) library to trigger native file picker dialogs,
 * importing and configuring custom fonts,
-* creating an using a [component](https://docs.rs/iced/0.10.0/iced/widget/trait.Component.html),
+* creating and using a [component](https://docs.rs/iced/0.10.0/iced/widget/trait.Component.html),
 * performing custom styling,
 * and other stuff.
 
@@ -40,16 +40,14 @@ This project is mainly targeted at Rust programmers who are in the process of le
 
 ### Potential issue
 
-This project uses the [rfd](https://github.com/PolyMeilex/rfd) library to display native file picker dialogs. I noticed, on my development system (i.e. `macOS`), that running the application with `cargo run` or by simply executing the binary in a terminal (e.g. `./target/release/iced_gif_maker`) will cause `rfd` to crash the application when trying to trigger a dialog. On the other hand, no problem arises, for instance, when starting the application using the following syntaxes: `/bin/bash -c "cargo run --release"` or `env cargo run --release`. Launching the application from a shell script will also solve the problem.
-
-At this point, I'm not sure whether this is a permission issue, an environment issue, or something else, but, in the meantime, I recommend trying these workarounds if you face a similar issue when triggering dialogs. If none of these workarounds work, please let me know by [opening an issue](https://github.com/BB-301/rust-iced-gif-maker/issues) and we'll try to figure this out together.
+This project uses the [rfd](https://github.com/PolyMeilex/rfd) library to display native file picker dialogs. I noticed, on my development system (i.e. `macOS`), that running the application with `cargo run` or by simply executing the binary in a terminal (e.g. `./target/release/iced_gif_maker`) will cause `rfd` to crash the application when trying to trigger a dialog. On the other hand, no problem arises, for instance, when starting the application using the following syntaxes: `/bin/bash -c "cargo run --release"` or `env cargo run --release`. Launching the application from a shell script will also work fine. At this point, I have reasons to believe that this is a permission issue, but I need to research the problem further. So, in the meantime, I recommend trying these workarounds if you face a similar issue when triggering dialogs. If none of these workarounds work, please let me know by [opening an issue](https://github.com/BB-301/rust-iced-gif-maker/issues) and we'll try to figure this out together.
 
 ### Requirements
 
 * The `ffmpeg` binary must be available on your system's path.
   * Note that it is possible to use the `ICED_GIF_MAKER_FFMPEG_PATH` environment variable to specify the absolute location of the binary on the system if the binary is not on the path. See [Build and running - More options](#more-options) for an example.
   * If you need to download `FFmpeg`, please visit the official [FFmpeg download page](https://ffmpeg.org/download.html).
-  * NOTE: At the moment, the [rust-ffmpeg-gif-maker](https://github.com/BB-301/rust-ffmpeg-gif-maker/releases/tag/0.1.1) library has successfully been tested with `ffmpeg version 5.0-tessus` and `ffmpeg version 6.0-tessus` on `macOS`. So please feel free to let me know by [opening an issue](https://github.com/BB-301/rust-iced-gif-maker/issues) if you encounter any problems when trying to build and run on your system.
+  * NOTE: At the moment, the [rust-ffmpeg-gif-maker](https://github.com/BB-301/rust-ffmpeg-gif-maker/releases/tag/0.1.1) library has successfully been tested with `ffmpeg version 5.0-tessus` and `ffmpeg version 6.0-tessus` on `macOS`, as well as with version `ffmpeg version N-112483-gd799ad2404-20231020` on `Windows 11`. So please feel free to let me know by [opening an issue](https://github.com/BB-301/rust-iced-gif-maker/issues) if you encounter any problems when trying run the application on your system.
 
 ### Building and running
 
@@ -84,10 +82,10 @@ RUST_LOG="iced_gif_maker=debug" cargo run --release --features logging
 
 ## Still to do...
 
-* I have yet to test this application on a Windows system.
-* I need to fix the bug described in [How to build - Potential issue](#potential-issue), about [rfd](https://github.com/PolyMeilex/rfd) making the application crash on `macOS` (and maybe elsewhere) when some environment variable(s) is(are) missing.
+* The application was tested on `macOS` and `Windows 11`, but I would also like to test it on `Raspberry Pi OS`.
+* I need to fix the bug described in [How to build - Potential issue](#potential-issue), about [rfd](https://github.com/PolyMeilex/rfd) making the application crash on `macOS` (and maybe elsewhere).
 * Ideally, the application would warn the user when (if) a save operation fails. But currently the application only prints whether the save operation was successful or not to `stdout`.
-* This project currently relies on a [forked version](https://github.com/BB-301/iced_gif/tree/tmp) of the [iced_gif](https://github.com/tarkah/iced_gif) widget repository. In this application, the `iced_gif::gif::Frames::from_bytes` (from the `tokio` feature flag) is used to decode the animated GIF into frames that are required by the widget. But when starting a decoding job, that job cannot be cancelled. This is generally not a problem for small to mid sized GIFs, but it could be wasteful for bigger ones. A simple solution around this problem would be to modify `iced_gif::gif::Frames::from_bytes` with an optional argument for the receiver's part of a channel that would allow cancelling a job, and then use that channel's sender part to signal cancellation from the application, when required.
+* This project currently relies on a [forked version](https://github.com/BB-301/iced_gif/tree/tmp) of the [iced_gif](https://github.com/tarkah/iced_gif) widget repository. In this application, the `iced_gif::gif::Frames::from_bytes` (from the `tokio` feature flag) is used to decode the animated GIF into frames that are required by the widget. But when starting a decoding job, that job cannot be cancelled. This is generally not a problem for small to mid sized GIFs, but it could be wasteful for bigger ones. A simple solution around this problem would be to modify `iced_gif::gif::Frames::from_bytes` with an optional argument for the receiver part of a channel that would allow cancelling a job, and then use that channel's sender part to signal cancellation from the application, when required.
 
 ## Contact
 
